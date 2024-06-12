@@ -1,5 +1,7 @@
 ## Tropical Cyclone Data Viewer (Work In Progress!)
 Tropical Cyclone Data Viewer is the name for this project, though it is more of an expectation for how this project will shape in the future because the current feature set is so limited that it doesn't deserve this name. Please stay tuned for updates!
+### How to Run the Program
+In a Python environment, run tcdv_main.py. Remember to only run this!
 ### Current Features 
 * Reads from the latest [ATCF](https://en.wikipedia.org/wiki/Automated_Tropical_Cyclone_Forecasting_System) (Automated Tropical Cyclone Forecasting System) and processes the text into more understandable information.
 * Lists all tropical cyclones that are currently active in the world. Under each storm, there will be information about the storm's name, current classification (like Invest, Tropical Depression, Hurricane...etc. It can use terms like "Typhoon" and "Cyclone" depending on the basin!), the numbering, current maximum winds, current minimum pressure, and current location.
