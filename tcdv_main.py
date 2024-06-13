@@ -15,10 +15,13 @@ def atcf_read():
 
 
 def show_all_info():
-    print("Currently Active Tropical Cyclones and Invests: ")
-    for i in range(0, len(storm_list)):
-        print(storm_list[i].show_info())
-        print("\n")
+    if not storm_list:
+        print("Currently, there is no tropical cyclone active globally.")
+    else:
+        print("Currently Active Tropical Cyclones and Invests: ")
+        for i in range(0, len(storm_list)):
+            print(storm_list[i].show_info())
+            print("\n")
 
 
 atcf_read()
