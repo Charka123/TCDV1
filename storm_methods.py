@@ -3,8 +3,11 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def find_storm_class(number, year):
-    url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
+def find_storm_class(number, basin, year):
+    if basin == "ATL" or basin == "EPAC":
+        url = "https://ftp.nhc.noaa.gov/atcf/btk/b" + number + ".dat"
+    else:
+        url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
     try:
         link = requests.get(url, verify=False, timeout=2)
         for line in link.text.splitlines():
@@ -20,14 +23,14 @@ def find_storm_class(number, year):
 
 
 def storm_class_write(number, basin, year):
-    storm_class_word = find_storm_class(number, year)
+    storm_class_word = find_storm_class(number, basin, year)
     if storm_class_word == "TS":
         if basin == "IO":
             return "Cyclonic Storm"
         else:
             return "Tropical Storm"
     elif storm_class_word == "DB" or storm_class_word == "LO":
-        if "TD" in best_track_line_number(number, year) or "TS" in best_track_line_number(number, year):
+        if "TD" in best_track_line_number(number, basin, year) or "TS" in best_track_line_number(number, basin, year):
             return "Remnants of"
         elif (number[2:4] not in ["90", "91", "92", "93", "94", "95", "96", "97", "98", "99"]
               and (basin == "ATL" or basin == "EPAC")):
@@ -57,9 +60,12 @@ def storm_class_write(number, basin, year):
         return ""
 
 
-def best_track_line_number(number, year):
+def best_track_line_number(number, basin, year):
     storm_index_list = []
-    url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
+    if basin == "ATL" or basin == "EPAC":
+        url = "https://ftp.nhc.noaa.gov/atcf/btk/b" + number + ".dat"
+    else:
+        url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
     try:
         link = requests.get(url, verify=False, timeout=2)
         for line in link.text.splitlines()[0:len(link.text.splitlines())-1]:
