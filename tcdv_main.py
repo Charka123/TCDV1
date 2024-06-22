@@ -24,5 +24,30 @@ def show_all_info():
             print("\n")
 
 
+def show_one_info(number):
+    function_value = False
+    for i in range(0, len(storm_list)):
+        if storm_list[i].get_number() == number:
+            print(storm_list[i].show_info())
+            function_value = True
+    return function_value
+
+
 atcf_read()
-show_all_info()
+print("Welcome to Tropical Cyclone Data Viewer!")
+storm_number_select = ""
+while_condition = None
+
+while not while_condition:
+    storm_number_select = input("Please type the designation number (Example: WP012024) of a currently active tropical "
+                                "cyclone or type \"ALL\" to show all tropical cyclones that are currently active: ")
+    if storm_number_select == "ALL":
+        show_all_info()
+        while_condition = True
+    else:
+        if not show_one_info(storm_number_select):
+            print("Invalid input. Please try again.")
+            while_condition = False
+        else:
+            show_one_info(storm_number_select)
+            while_condition = True
