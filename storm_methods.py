@@ -3,6 +3,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+# Goes into the best track file and locate the storm classification
 def find_storm_class(number, basin, year):
     if basin == "ATL" or basin == "EPAC":
         url = "https://ftp.nhc.noaa.gov/atcf/btk/b" + number + ".dat"
@@ -22,6 +23,7 @@ def find_storm_class(number, basin, year):
         return "No Data Found"
 
 
+# Based on the storm classification found, process it into a word/phrase
 def storm_class_write(number, basin, year):
     storm_class_word = find_storm_class(number, basin, year)
     if storm_class_word == "TS":
@@ -60,6 +62,7 @@ def storm_class_write(number, basin, year):
         return ""
 
 
+# This method is used to determine whether a disturbance is an invest or a PTC
 def best_track_line_number(number, basin, year):
     storm_index_list = []
     if basin == "ATL" or basin == "EPAC":

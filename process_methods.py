@@ -1,6 +1,7 @@
 import geographic_methods
 
 
+# Gather information and return the storm number
 def number_process(basin, lon, number, date):
     processed_number_basin = ""
 
@@ -31,6 +32,7 @@ def number_process(basin, lon, number, date):
     return processed_number
 
 
+# Gather information and return the desired date format
 def date_process(date):
     # Determine the year part #
     year = "20" + date[0:2]
@@ -46,11 +48,13 @@ def date_process(date):
     return processed_date
 
 
+# Gather information and return the desired time format
 def time_process(time):
     processed_time = time[0:2] + ":" + time[2:] + " UTC"
     return processed_time
 
 
+# Determining the basin letter depending on the basin (sub-basin is also considered)
 def basin_letter_process(basin, longitude):
     if basin == "ATL":
         return "L"
