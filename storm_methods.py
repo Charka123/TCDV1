@@ -10,7 +10,7 @@ def find_storm_class(number, basin, year):
     else:
         url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
     try:
-        link = requests.get(url, verify=False, timeout=2)
+        link = requests.get(url, verify=False, timeout=10)
         for line in link.text.splitlines():
             pass
         last_line = line
@@ -19,7 +19,7 @@ def find_storm_class(number, basin, year):
             if i == 10:
                 storm_class = last_line.split(",")[i].strip()
         return storm_class
-    except requests.exceptions.ConnectTimeout:
+    except requests.exceptions.ConnectTimeout or requests.exceptions.ReadTimeout:
         return "No Data Found"
 
 
@@ -70,11 +70,11 @@ def best_track_line_number(number, basin, year):
     else:
         url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
     try:
-        link = requests.get(url, verify=False, timeout=2)
+        link = requests.get(url, verify=False, timeout=10)
         for line in link.text.splitlines()[0:len(link.text.splitlines())-1]:
             for i in range(0, 11):
                 if i == 10:
                     storm_index_list.append(line.split(",")[i].strip())
         return storm_index_list
-    except requests.exceptions.ConnectTimeout:
+    except requests.exceptions.ConnectTimeout or requests.exceptions.ReadTimeout:
         return None
