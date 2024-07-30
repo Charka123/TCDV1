@@ -5,8 +5,8 @@ import bst_process_methods
 datapoint_list = []
 
 
-def bst_read():
-    with open("WP012024_Ewiniar.txt") as file:
+def bst_read(name):
+    with open(name + ".txt") as file:
         date = ""
         for line in file:
             if not date == line.split(",")[2].strip():
@@ -31,8 +31,13 @@ def bst_output(max_winds, min_pressure, active_time, ace_calc, cat_list):
             + "Minimum Pressure: " + pressure + "mb" + "\n" + "Active Time: " + time + "\n" + "ACE: " + str(ace))
 
 
-bst_read()
-print(bst_output(bst_process_methods.max_winds(datapoint_list), bst_process_methods.min_pressure(datapoint_list),
-                 bst_process_methods.active_time(datapoint_list),
-                 round(bst_process_methods.ace_calc(datapoint_list), 4),
-                 bst_process_methods.list_of_categories(datapoint_list)))
+file_name = input("Please type the file name of the best track file: ")
+try:
+    bst_read(file_name)
+    print(bst_output(bst_process_methods.max_winds(datapoint_list), bst_process_methods.min_pressure(datapoint_list),
+                     bst_process_methods.active_time(datapoint_list),
+                     round(bst_process_methods.ace_calc(datapoint_list), 4),
+                     bst_process_methods.list_of_categories(datapoint_list)))
+except FileNotFoundError:
+    print("File not found.")
+
