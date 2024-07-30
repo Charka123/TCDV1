@@ -9,6 +9,7 @@ In a Python environment, run tcdv_main.py. Remember to only run this!
 * Supports the detection of Potential Tropical Cyclones used by the NHC for the northeastern Pacific Ocean and North Atlantic Ocean.
 ### Known Issues 
 * When the best track file for a storm has not been created by NRL (Navel Research Laboratory) yet but shows up on the ATCF track file, the storm classification will not display properly.
+* Under poor Internet connection, users may encounter code error due to the code that is reading online best track file triggering timeout error. A fix to this issue is not prioritized right now and I strongly advise users to run this program under a good Internet connection.
 ### Future Plan 
 Over this summer, I am planning to add another feature that allows users to upload the best track file and the program can output information such as the active duration of the storm, maximum winds, minimum central pressure, and accumulated cyclone energy ([ACE](https://en.wikipedia.org/wiki/Accumulated_cyclone_energy)) of that storm. The program will also be able to generate an image of the storm's track. 
 <br> <br>
