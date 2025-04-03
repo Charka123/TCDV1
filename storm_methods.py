@@ -8,7 +8,7 @@ def find_storm_class(number, basin, year):
     if basin == "ATL" or basin == "EPAC":
         url = "https://ftp.nhc.noaa.gov/atcf/btk/b" + number + ".dat"
     else:
-        url = "https://www.nrlmry.navy.mil/atcf_web/docs/tracks/" + year + "/b" + number + ".dat"
+        url = "https://www.ssd.noaa.gov/PS/TROP/DATA/ATCF/JTWC/" + "/b" + number + ".dat"
     try:
         link = requests.get(url, verify=False, timeout=10)
         for line in link.text.splitlines():
